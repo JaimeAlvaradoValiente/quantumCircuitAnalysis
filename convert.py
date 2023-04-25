@@ -30,6 +30,7 @@ for root, dirs, files in os.walk(repo_path):
         file_path = os.path.join(root, file)
         json_data = convert_to_json(file_path)
         
+        
         # Escribe el archivo JSON en la misma ruta que el archivo .py
         if json_data:
             with open(file_path.replace('.py', '.json'), 'w') as f:
