@@ -37,3 +37,5 @@ if __name__ == "__main__":
                     json_file_path = os.path.join(json_dir, file.replace(".py", ".json"))
                     with open(json_file_path, "w") as f:
                         f.write(json_data)
+                    with open(json_file_path) as f:
+                        print(f.read())
