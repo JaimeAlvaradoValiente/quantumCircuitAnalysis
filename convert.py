@@ -14,7 +14,18 @@ def convert_to_json(file_path):
         "code": code
     }
 
-    return json.dumps(json_obj)
+     # Obtener la línea que define el backend y extraer el nombre del backend
+    backend_line = None
+    for line in code.split("\n"):
+        if "Aer.get_backend" in line:
+            backend_line = line.strip()
+            break
+    if backend_line:
+        backend = backend_line.split("(")[1].split(")")[0].strip("\"'")
+    else:
+        backend = "qasm_simulator"
+
+    return json_obj, backend
 
 
 if __name__ == "__main__":
@@ -32,10 +43,13 @@ if __name__ == "__main__":
         for file in files:
             file_path = os.path.join(root, file)
             if file_path.endswith(".py") and file_path != os.path.abspath(__file__):
-                json_data = convert_to_json(file_path)
+                json_data, backend = convert_to_json(file_path)
                 if json_data:
                     json_file_path = os.path.join(json_dir, file.replace(".py", ".json"))
                     with open(json_file_path, "w") as f:
                         f.write(json_data)
                     with open(json_file_path) as f:
                         print(f.read())
+                
+                print(f"The backend for {file_path} is {backend}")
+
