@@ -20,6 +20,7 @@ def convert_to_json(file_path):
 if __name__ == "__main__":
     # Obtener la ruta del directorio raíz del repositorio
     repo_path = os.environ["GITHUB_WORKSPACE"]
+    print(repo_path)
 
     # Crear el directorio `json` si no existe
     json_dir = os.path.join(repo_path, "json")
