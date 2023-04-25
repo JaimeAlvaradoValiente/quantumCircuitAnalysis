@@ -25,7 +25,7 @@ def convert_to_json(file_path):
     else:
         backend = "qasm_simulator"
 
-    return json_obj, backend
+    return json.dumps(json_obj), backend
 
 
 if __name__ == "__main__":
