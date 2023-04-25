@@ -50,6 +50,5 @@ if __name__ == "__main__":
                         f.write(json_data)
                     with open(json_file_path) as f:
                         print(f.read())
-                
-                print(f"The backend for {file_path} is {backend}")
+                    print(f"The backend for {file_path} is {backend}")
 
