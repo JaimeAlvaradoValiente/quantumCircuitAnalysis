@@ -31,7 +31,7 @@ if __name__ == "__main__":
     for root, dirs, files in os.walk(repo_path):
         for file in files:
             file_path = os.path.join(root, file)
-            if file_path.endswith(".py"):
+            if file_path.endswith(".py") and file_path != os.path.abspath(__file__):
                 json_data = convert_to_json(file_path)
                 if json_data:
                     json_file_path = os.path.join(json_dir, file.replace(".py", ".json"))
