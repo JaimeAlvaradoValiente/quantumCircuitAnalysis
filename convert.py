@@ -1,37 +1,38 @@
-import os
 import json
+import os
 
-# Funcion para convertir los archivos .py en formato JSON
+
 def convert_to_json(file_path):
-    # Verifica si el archivo es .py
-    if not file_path.endswith('.py'):
-        return None
-    
-    # Lee el contenido del archivo .py
-    with open(file_path, 'r') as f:
-        content = f.read()
-    
-    # Crea un diccionario para almacenar el contenido y la ruta del archivo
-    data = {
-        'path': file_path,
-        'content': content
+    """Convierte el archivo Python en un objeto JSON."""
+    with open(file_path) as f:
+        code = f.read()
+
+    # Analizar el código Python y crear un objeto JSON
+    # con el contenido del archivo
+    json_obj = {
+        "filename": os.path.basename(file_path),
+        "code": code
     }
-    
-    # Convierte el diccionario en formato JSON y devuelve el resultado
-    return json.dumps(data)
 
-# Obtiene la ruta del repositorio
-repo_path = os.environ['GITHUB_WORKSPACE']
+    return json.dumps(json_obj)
 
-# Recorre todos los archivos en la ruta del repositorio
-for root, dirs, files in os.walk(repo_path):
-    for file in files:
-        # Convierte cada archivo .py en formato JSON
-        file_path = os.path.join(root, file)
-        json_data = convert_to_json(file_path)
-        
-        
-        # Escribe el archivo JSON en la misma ruta que el archivo .py
-        if json_data:
-            with open(file_path.replace('.py', '.json'), 'w') as f:
-                f.write(json_data)
+
+if __name__ == "__main__":
+    # Obtener la ruta del directorio raíz del repositorio
+    repo_path = os.environ["GITHUB_WORKSPACE"]
+
+    # Crear el directorio `json` si no existe
+    json_dir = os.path.join(repo_path, "json")
+    if not os.path.exists(json_dir):
+        os.mkdir(json_dir)
+
+    # Recorrer todos los archivos `.py` en el repositorio y crear archivos `.json`
+    for root, dirs, files in os.walk(repo_path):
+        for file in files:
+            file_path = os.path.join(root, file)
+            if file_path.endswith(".py"):
+                json_data = convert_to_json(file_path)
+                if json_data:
+                    json_file_path = os.path.join(json_dir, file.replace(".py", ".json"))
+                    with open(json_file_path, "w") as f:
+                        f.write(json_data)
