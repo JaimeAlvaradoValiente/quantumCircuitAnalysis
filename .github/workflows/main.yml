@@ -1,4 +1,4 @@
-name: Convert Py to JSON and call external service
+name: Convert Py to JSON and call external service to measurement
 on: push
 jobs:
   convert-and-call:
@@ -14,5 +14,5 @@ jobs:
       run: pip install -r requirements.txt # Archivo de requisitos con los paquetes necesarios
     - name: Delete old JSON files
       run: find . -name '*.json' -delete # Busca y elimina todos los archivos JSON existentes en el repositorio
-    - name: Convert Py to JSON
-      run: python convert.py
+    - name: Quantum circuit measurement
+      run: python convert.py #Realiza la conversión en JSON de los circuitos y realiza la medición
