@@ -18,7 +18,7 @@ def predict(json_data, backend):
 
     response = requests.post(url, headers=headers, data=json.dumps(data))
 
-    print(response.text)
+    return(response.text)
 
 def convert_to_json(file_path):
     """Convierte el archivo Python en un objeto JSON."""
@@ -43,8 +43,8 @@ def convert_to_json(file_path):
     else:
         backend = "ibmq_lima"
 
-    predict(json_obj, backend)
-    return json.dumps(json_obj), backend
+    response = predict(json_obj, backend)
+    return json.dumps(json_obj), backend, response
 
 
 if __name__ == "__main__":
@@ -62,7 +62,7 @@ if __name__ == "__main__":
         for file in files:
             file_path = os.path.join(root, file)
             if file_path.endswith(".py") and file_path != os.path.abspath(__file__):
-                json_data, backend = convert_to_json(file_path)
+                json_data, backend, response = convert_to_json(file_path)
                 if json_data:
                     json_file_path = os.path.join(json_dir, file.replace(".py", ".json"))
                     with open(json_file_path, "w") as f:
@@ -70,6 +70,7 @@ if __name__ == "__main__":
                     with open(json_file_path) as f:
                         print(f.read())
                     print(f"The backend for {json_file_path} is {backend}")
+                    print(f"El resultado de la medición es: {response}")
                     
 
 
