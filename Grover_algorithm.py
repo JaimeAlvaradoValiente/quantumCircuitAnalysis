@@ -1,10 +1,9 @@
-from qiskit import execute, QuantumRegister, ClassicalRegister, QuantumCircuit, Aer
-from numpy import pi
+from qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit, Aer, execute
 
 q = QuantumRegister(2)
 c = ClassicalRegister(2)
 qc = QuantumCircuit(q, c)
-#Grover circuit
+
 qc.h(q[0])
 qc.h(q[1])
 qc.x(q[1])

@@ -1,4 +1,4 @@
-from qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit, execute, Aer
+from qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit, Aer, execute
 from numpy import pi
 
 qreg_q = QuantumRegister(4, 'q')
@@ -28,7 +28,7 @@ circuit.measure(qreg_q[1], creg_c[1])
 circuit.measure(qreg_q[2], creg_c[2])
 circuit.measure(qreg_q[3], creg_c[3])
 
-backend = Aer.get_backend("ibmq_lima")
+backend = Aer.get_backend("ibmq_belem")
 x=int(1024)
 job = execute(circuit, backend, shots=x)
 result = job.result()
