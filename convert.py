@@ -14,7 +14,7 @@ def predict(file_path, backend):
     data = {
         'backend': backend,
         'circuit': file_path
-}
+    }
 
     response = requests.post(url, headers=headers, data=json.dumps(data))
 
