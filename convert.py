@@ -4,8 +4,6 @@ import requests
 
 
 def predict(json_data, backend):
-    with open(json_data) as f:
-        print(f.read())
     # Hacer la llamada a predict_error desplegado en AWS
     url = 'http://54.217.38.166:5000/predict_error'
 
@@ -18,7 +16,7 @@ def predict(json_data, backend):
         'circuit': json_data
     }
 
-    response = requests.post(url, headers=headers, data=json.dumps(data))
+    response = requests.post(url, headers=headers, data=data)
 
     print(response.text)
 
