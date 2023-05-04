@@ -65,7 +65,7 @@ if __name__ == "__main__":
                 if json_data:
                     json_file_path = os.path.join(json_dir, file.replace(".py", ".json"))
                     with open(json_file_path, "w") as f:
-                        f.write(json_data)
+                        f.write(json_file_path)
                     with open(json_file_path) as f:
                         print(f.read())
                     print(f"The backend for {json_file_path} is {backend}")
