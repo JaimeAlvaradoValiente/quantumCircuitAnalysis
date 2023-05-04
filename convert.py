@@ -3,7 +3,7 @@ import os
 import requests
 
 
-def predict(json_file_path, backend):
+def predict(json_data, backend):
     # Hacer la llamada a predict_error desplegado en AWS
     url = 'http://54.217.38.166:5000/predict_error'
 
@@ -13,7 +13,7 @@ def predict(json_file_path, backend):
 
     data = {
         'backend': backend,
-        'circuit': json_file_path
+        'circuit': json_data
     }
 
     response = requests.post(url, headers=headers, data=json.dumps(data))
@@ -64,11 +64,11 @@ if __name__ == "__main__":
                 json_data, backend = convert_to_json(file_path)
                 if json_data:
                     json_file_path = os.path.join(json_dir, file.replace(".py", ".json"))
-                    with open(json_file_path, "w") as f:
-                        f.write(json_file_path)
-                    with open(json_file_path) as f:
+                    #with open(json_file_path, "w") as f:
+                    #    f.write(json_data)
+                    with open(json_data) as f:
                         print(f.read())
                     print(f"The backend for {json_file_path} is {backend}")
-                    predict(json_file_path, backend)
+                    predict(json_data, backend)
 
 
