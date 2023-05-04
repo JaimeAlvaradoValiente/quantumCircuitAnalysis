@@ -70,7 +70,7 @@ if __name__ == "__main__":
                     with open(json_file_path) as f:
                         print(f.read())
                     print(f"The backend for {json_file_path} is {backend}")
-                    print(f"El resultado de la medición es: {response}")
+                    print(f"The result of the measurement is: {response}")
                     
 
 
