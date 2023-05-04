@@ -28,7 +28,7 @@ circuit.measure(qreg_q[1], creg_c[1])
 circuit.measure(qreg_q[2], creg_c[2])
 circuit.measure(qreg_q[3], creg_c[3])
 
-backend = Aer.get_backend("unitary_simulator_py")
+backend = Aer.get_backend("ibmq_lima")
 x=int(1024)
 job = execute(circuit, backend, shots=x)
 result = job.result()

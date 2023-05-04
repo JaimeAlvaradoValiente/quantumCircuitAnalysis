@@ -15,7 +15,7 @@ qc.x(q[1])
 qc.h(q[1])
 qc.measure(q, c)
 
-backend = Aer.get_backend("unitary_simulator_py")
+backend = Aer.get_backend("ibmq_guadalupe")
 x=int(1024)
 job = execute(qc, backend, shots=x)
 result = job.result()

@@ -41,7 +41,7 @@ def convert_to_json(file_path):
     if backend_line:
         backend = backend_line.split("(")[1].split(")")[0].strip("\"'")
     else:
-        backend = "qasm_simulator"
+        backend = "ibmq_lima"
 
     predict(json_obj, backend)
     return json.dumps(json_obj), backend
