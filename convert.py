@@ -1,6 +1,24 @@
 import json
 import os
+import requests
 
+
+def predict(file_path, backend):
+    # Hacer la llamada a predict_error desplegado en AWS
+    url = 'http://54.217.38.166:5000/predict_error'
+
+    headers = {
+        'Content-Type': 'application/json'
+    }
+
+    data = {
+        'backend': backend,
+        'circuit': file_path
+}
+
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+
+    print(response.text)
 
 def convert_to_json(file_path):
     """Convierte el archivo Python en un objeto JSON."""
@@ -51,4 +69,6 @@ if __name__ == "__main__":
                     with open(json_file_path) as f:
                         print(f.read())
                     print(f"The backend for {file_path} is {backend}")
+                    predict(file_path, backend)
+
 
